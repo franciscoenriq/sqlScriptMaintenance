@@ -1,1 +1,1 @@
-Para ejecutar la idea es usar el windows scheduler task para dejar programada la ejecucion del archivo c#. el se encarga luego de ejecutar en sql los comandos que estan en los scripts.
+Scripts que se pueden ejecutar en sql para poder realizar planes de mantenimiento. La idea es usar directamente el SQLCMD para ejecutarlos, de esta forma evitamos usar el sql agent para el caso en que no se disponga de una version de sql full. 
