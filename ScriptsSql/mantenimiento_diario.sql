@@ -18,7 +18,7 @@ SET @ruta = N'C:\backup-softland\';
 -- en insert into coloque todas las bd quiera que sean parte del plan de mantenimiento
 DECLARE @databases TABLE (database_name NVARCHAR(255));
 INSERT INTO @databases VALUES 
-    (N'VANTRUST');
+    (N'SANF');
 
 -- Iteramos sobre las bases de datos que queremos mantener
 DECLARE db_cursor CURSOR FOR 
@@ -35,8 +35,8 @@ BEGIN
 
         -------------------------------------------------------------------------------------------
         SET @start_time = SYSDATETIME();
-        -- Reorganizamos índices que tengan una fragmentacion entre el 5 y el 35%
-        PRINT N'Reorganizando índices para la base de datos: ' + @database_name;
+        -- Reorganizamos índices que tengan una fragmentacion entre el 5 y el 30%
+        PRINT N'Reorganizando indices para la base de datos: ' + @database_name;
 
         SET @sql_command = N'
             USE ['+ @database_name + N'];
@@ -113,7 +113,7 @@ BEGIN
         SET @elapsed_time = DATEDIFF(SECOND, @start_time, @end_time);
         SET @time_actualizar_estadisticas = @time_actualizar_estadisticas + @elapsed_time; 
 
-        PRINT N'Estadísticas actualizadas para la base de datos: ' + @database_name;
+        PRINT N'Estadisticas actualizadas para la base de datos: ' + @database_name;
 
          ---------------------------------------------------------------------------------------------
         SET @start_time = SYSDATETIME();
@@ -156,9 +156,9 @@ BEGIN
             CLOSE IndexCursor;
             DEALLOCATE IndexCursor;
         ';
-        EXEC sp_executesql @sql_command;
+        --EXEC sp_executesql @sql_command;
         SET @end_time = SYSDATETIME();
-        SET @elapsed_time = DATEDIFF(MINUTE, @start_time, @end_time);
+        SET @elapsed_time = DATEDIFF(SECOND, @start_time, @end_time);
         SET @time_reconstruccion = @time_reconstruccion + @elapsed_time; 
 
         SET @start_time = SYSDATETIME();
@@ -185,8 +185,9 @@ END;
 
 PRINT N'Tiempo transcurrido para actualizar estadisticas(segundos) : ' + CAST(@time_actualizar_estadisticas AS NVARCHAR) ;
 PRINT N'Tiempo transcurrido para reoganizar indices(segundos) : ' + CAST(@time_reoganizacion AS NVARCHAR) ;
-PRINT N'Tiempo transcurrido para reconstruir indices(segundos):' + CAST(@time_reconstruccion AS NVARCHAR); 
+--PRINT N'Tiempo transcurrido para reconstruir indices(segundos):' + CAST(@time_reconstruccion AS NVARCHAR); 
 PRINT N'Tiempo transcurrido para backup(segundos) : ' + CAST(@time_backup AS NVARCHAR) ;
+PRINT N'Tiempo total transcurrido (segundos): ' + CAST(@time_actualizar_estadisticas + @time_reoganizacion + @time_backup AS NVARCHAR);
 
 -- Cerrar y liberar el cursor
 CLOSE db_cursor;
