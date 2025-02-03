@@ -4,14 +4,10 @@ DECLARE @database_name NVARCHAR(255);
 DECLARE @database_namelog NVARCHAR(255);
 DECLARE @sql_command NVARCHAR(MAX);
 
--- Definimos Ruta Backup 
-SET @ruta = N'C:\backup\';
-
 -- Lista de bases de datos a procesar 
 DECLARE @databases TABLE (database_name NVARCHAR(255));
 INSERT INTO @databases VALUES 
-    (N'beneficiarios'),
-    (N'SCL_BD');
+    (N'VNT');
 
 -- Iteramos sobre las bases de datos que queremos mantener
 DECLARE db_cursor CURSOR FOR 
@@ -23,11 +19,7 @@ FETCH NEXT FROM db_cursor INTO @database_name;
 WHILE @@FETCH_STATUS = 0 
 BEGIN
     BEGIN TRY 
-
-        -- Crear ruta completa
-        SET @ruta_completa = @ruta + @database_name + N'-Backup.bak';
-        PRINT N'Procesando Base de Datos: ' + @database_name;
-
+        
         -- Obtener nombre del archivo de log
         SET @sql_command = N'
             SELECT @database_namelog_OUT = [name]
@@ -46,16 +38,49 @@ BEGIN
         EXEC sp_executesql @sql_command;
 
         --Shrinkfile 
-        SET @sql_command = N'DBCC SHRINKFILE (' + @database_namelog + N', TRUNCATEONLY); '
+        SET @sql_command = N'DBCC SHRINKFILE (' + @database_namelog + N', 10); '
         EXEC sp_executesql @sql_command;
         -- volvemos nuevamente a modo full 
 
         SET @sql_command = N'USE [' + @database_name + N']; ALTER DATABASE ' + @database_name + N' SET RECOVERY FULL;'
         EXEC sp_executesql @sql_command; 
 
+        -- Reconstruimos si la fragmentacion supera el 30%, esto es para la bd. 
+        SET @sql_command = N' USE ['+ @database_name + N'];
+            DECLARE @TableName NVARCHAR(128);
+            DECLARE @IndexName NVARCHAR(128);
+            DECLARE @ReorganizeSQL NVARCHAR(MAX);
 
-        
-        PRINT N' Plan semanal completao para: ' + @database_name;
+            DECLARE IndexCursor CURSOR FOR
+            SELECT 
+                t.name AS TableName,
+                i.name AS IndexName
+            FROM 
+                sys.dm_db_index_physical_stats(DB_ID(), NULL, NULL, NULL, ''LIMITED'') d
+                JOIN sys.indexes i ON d.object_id = i.object_id AND d.index_id = i.index_id
+                JOIN sys.tables t ON t.object_id = d.object_id
+            WHERE 
+                d.avg_fragmentation_in_percent > 30 -- Fragmentación alta
+                AND i.type > 0 -- Ignorar índices tipo HEAP
+                AND i.is_disabled = 0; -- Ignorar índices deshabilitados
+            
+            OPEN IndexCursor;
+            FETCH NEXT FROM IndexCursor INTO @TableName, @IndexName;
+
+            WHILE @@FETCH_STATUS = 0
+            BEGIN
+                SET @ReorganizeSQL = ''ALTER INDEX ['' + @IndexName + ''] ON ['' + @TableName + ''] REBUILD;'';
+                EXEC sp_executesql @ReorganizeSQL;
+                FETCH NEXT FROM IndexCursor INTO @TableName, @IndexName;
+            END;
+
+            CLOSE IndexCursor;
+            DEALLOCATE IndexCursor;
+        ';
+        EXEC sp_executesql @sql_command;
+
+       
+        PRINT N' Plan semanal completado para: ' + @database_name;
     END TRY
 
     BEGIN CATCH
