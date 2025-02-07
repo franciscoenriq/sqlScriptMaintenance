@@ -13,7 +13,9 @@ DECLARE @time_reconstruccion DECIMAL(10,2) = 0;
 -- Lista de bases de datos a procesar 
 DECLARE @databases TABLE (database_name NVARCHAR(255));
 INSERT INTO @databases VALUES 
-     (N'SANF');
+ (N'VNT'),
+ (N'VANTRUST'),
+ (N'SANF');
 
 -- Iteramos sobre las bases de datos que queremos mantener
 DECLARE db_cursor CURSOR FOR 

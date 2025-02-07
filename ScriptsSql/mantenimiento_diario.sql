@@ -18,7 +18,7 @@ SET @ruta = N'C:\backup-softland\';
 -- en insert into coloque todas las bd quiera que sean parte del plan de mantenimiento
 DECLARE @databases TABLE (database_name NVARCHAR(255));
 INSERT INTO @databases VALUES 
-    (N'SANF');
+ (N'VANTRUST');
 
 -- Iteramos sobre las bases de datos que queremos mantener
 DECLARE db_cursor CURSOR FOR 
@@ -32,6 +32,15 @@ BEGIN
     BEGIN TRY 
         -- Crear ruta completa
         SET @ruta_completa = @ruta + @database_name + N'-Backup.bak';
+        
+        -- Realizar el backup
+        SET @start_time = SYSDATETIME();
+        SET @sql_command = N'BACKUP DATABASE [' + @database_name + N'] TO DISK = N''' + @ruta_completa + N''' WITH  STATS = 100';
+        EXEC sp_executesql @sql_command;
+
+        SET @end_time = SYSDATETIME(); 
+        SET @elapsed_time = DATEDIFF(SECOND, @start_time, @end_time);
+        SET @time_backup = @time_backup + @elapsed_time; 
 
         -------------------------------------------------------------------------------------------
         SET @start_time = SYSDATETIME();
@@ -161,14 +170,6 @@ BEGIN
         SET @elapsed_time = DATEDIFF(SECOND, @start_time, @end_time);
         SET @time_reconstruccion = @time_reconstruccion + @elapsed_time; 
 
-        SET @start_time = SYSDATETIME();
-        -- Realizar el backup
-        SET @sql_command = N'BACKUP DATABASE [' + @database_name + N'] TO DISK = N''' + @ruta_completa + N''' WITH  STATS = 100';
-        EXEC sp_executesql @sql_command;
-
-        SET @end_time = SYSDATETIME(); 
-        SET @elapsed_time = DATEDIFF(SECOND, @start_time, @end_time);
-        SET @time_backup = @time_backup + @elapsed_time; 
 
         PRINT N'Backup completado para la base de datos: ' + @database_name;
     END TRY
