@@ -12,3 +12,10 @@ ALTER DATABASE VNT SET RECOVERY SIMPLE;
 DBCC SHRINKFILE (VNT, 0, TRUNCATEONLY);
 
 ALTER DATABASE VNT SET RECOVERY FULL ; 
+-----------------------------------------
+SELECT job.name, job.job_id, run_status, run_date, run_time, run_duration, step_name, message
+FROM msdb.dbo.sysjobhistory hist
+JOIN msdb.dbo.sysjobs job ON hist.job_id = job.job_id
+WHERE run_status = 0 
+ORDER BY run_date DESC;
+

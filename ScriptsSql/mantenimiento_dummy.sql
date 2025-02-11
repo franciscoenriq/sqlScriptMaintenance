@@ -19,7 +19,8 @@ SET @ruta = N'C:\backup-softland\';
 DECLARE @databases TABLE (database_name NVARCHAR(255));
 INSERT INTO @databases VALUES 
  (N'VNT'),
- (N'VANTRUST');
+ (N'VANTRUST'),
+ (N'SANF');
 
 -- Iteramos sobre las bases de datos que queremos mantener
 DECLARE db_cursor CURSOR FOR 
