@@ -1,12 +1,27 @@
+-- aca podemos saber el estado de la bd, tanto sus nombres como su 
+
 SELECT 
-    name AS DatabaseName,
-    state_desc AS Estado,
-    CASE 
-        WHEN state_desc = 'ONLINE' THEN 'Activa'
-        ELSE ' Inactiva o con problemas'
-    END AS EstadoDetallado,
-	GETDATE() AS FechaHoraEjecucion
-FROM sys.databases
+    d.name AS DatabaseName,
+    mf.name as name,
+	mf.state_desc AS FileStatem,
+	mf.physical_name,
+	CASE 
+		WHEN mf.type = 0 THEN 'Archivo de datos'
+		WHEN mf.type = 1 THEN 'Archivo Log'
+	END AS Tipo_Archivo, 
+    mf.size * 8 / 1024 AS Size_MB,
+	CASE 
+		WHEN mf.max_size = -1 THEN 'Tamano ilimitado' 
+		ELSE CAST(mf.max_size AS VARCHAR)
+	END  AS Tamano_maximo,
+	d.recovery_model,
+	d.create_date
+    
+FROM sys.master_files mf
+JOIN sys.databases d ON mf.database_id = d.database_id
+ORDER BY d.name;
+
+
 ---------------------------------------------------------------------------
 SELECT 
     name AS DatabaseName,
