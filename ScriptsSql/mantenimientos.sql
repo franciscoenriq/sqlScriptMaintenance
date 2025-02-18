@@ -16,13 +16,7 @@ DECLARE @time_shrinkfile DECIMAL(10,2) = 0;
 DECLARE @databases TABLE (database_name NVARCHAR(255));
 INSERT INTO @databases VALUES 
  (N'VNT'),
- (N'VANTRUST'),
- (N'SANF'),
- (N'AGFVNT'),
- (N'NOTASVNT'),
- (N'SERVFINANCIEROS'),
- (N'VENDORVNTSPA'),
- (N'VNTPATRIMONIAL');
+ (N'VANTRUST');
 
 -- Iteramos sobre las bases de datos que queremos mantener
 DECLARE db_cursor CURSOR FOR 

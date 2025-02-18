@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AppDbSettings" GeneratedClassName="SettingsApp">
+  <Profiles />
+  <Settings>
+    <Setting Name="servidorSql" Type="System.String" Scope="User">
+      <Value Profile="(Default)">localhost\SOFTLAND_TEST</Value>
+    </Setting>
+    <Setting Name="usuarioSql" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sa</Value>
+    </Setting>
+    <Setting Name="contrasenaSql" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Colocolo25</Value>
+    </Setting>
+    <Setting Name="rutaBase" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\sqlScriptMaintenance\ScriptsSql</Value>
+    </Setting>
+    <Setting Name="archivoBackup" Type="System.String" Scope="User">
+      <Value Profile="(Default)">backup_softland.sql</Value>
+    </Setting>
+    <Setting Name="archivoMantenimiento" Type="System.String" Scope="User">
+      <Value Profile="(Default)">mantenimientos.sql</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

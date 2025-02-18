@@ -16,9 +16,10 @@ SET @ruta = N'C:\backup-softland\';
 -- en insert into coloque todas las bd quiera que sean parte del plan de mantenimiento
 DECLARE @databases TABLE (database_name NVARCHAR(255));
 INSERT INTO @databases VALUES 
- (N'VNT'),
- (N'VANTRUST'),
- (N'SANF');
+ (N'SANF'),
+ (N'AGFVNT'),
+ (N'NOTASVNT'),
+ (N'SERVFINANCIEROS');
 
 -- Iteramos sobre las bases de datos que queremos mantener
 DECLARE db_cursor CURSOR FOR 

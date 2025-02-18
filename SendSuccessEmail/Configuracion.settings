@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SendSuccessEmail" GeneratedClassName="Configuracion">
+  <Profiles />
+  <Settings>
+    <Setting Name="logPath_backup" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Mantenimiento Softland\scriptsMantenimiento\Logs\BackupSoftland_logs</Value>
+    </Setting>
+    <Setting Name="smtpServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">smtp.office365.com</Value>
+    </Setting>
+    <Setting Name="port" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">587</Value>
+    </Setting>
+    <Setting Name="senderEmail" Type="System.String" Scope="User">
+      <Value Profile="(Default)">mesadeayuda@vantrust.cl</Value>
+    </Setting>
+    <Setting Name="senderPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">VNT.2020</Value>
+    </Setting>
+    <Setting Name="recipientEmail" Type="System.String" Scope="User">
+      <Value Profile="(Default)">francisco.almeida@vantrust.cl</Value>
+    </Setting>
+    <Setting Name="logPath_mantenimiento" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Mantenimiento Softland\scriptsMantenimiento\Logs\Mantenimiento_logs</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
