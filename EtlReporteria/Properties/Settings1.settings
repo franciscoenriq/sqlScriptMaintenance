@@ -6,12 +6,21 @@
       <Value Profile="(Default)">localhost\SOFTLAND_TEST</Value>
     </Setting>
     <Setting Name="ServidorSqlTarget" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">localhost\SOFTLAND_TEST</Value>
     </Setting>
     <Setting Name="UsuarioSqlDestino" Type="System.String" Scope="User">
       <Value Profile="(Default)">sa</Value>
     </Setting>
     <Setting Name="ContrasenaSqlDestino" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Colocolo25</Value>
+    </Setting>
+    <Setting Name="DatabaseDestino" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ReportSqlServerInformation</Value>
+    </Setting>
+    <Setting Name="UsuarioSqlTarget" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sa</Value>
+    </Setting>
+    <Setting Name="ContrasenaSqlTarget" Type="System.String" Scope="User">
       <Value Profile="(Default)">Colocolo25</Value>
     </Setting>
   </Settings>

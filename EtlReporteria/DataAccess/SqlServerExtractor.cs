@@ -9,6 +9,9 @@ using EtlReporteria.Models;
 namespace EtlReporteria.DataAccess
 {
     internal class SqlServerExtractor
+        /*
+         * Con esta clase podremos extraer la informacion dada la query que le coloquemos 
+         */
     {
             private SqlServerConnection _connection;
 
@@ -16,7 +19,6 @@ namespace EtlReporteria.DataAccess
             {
                 _connection = connection;
             }
-
             public IEnumerable<BackupHistory_Table> Extract_BackupHistory_Data(string query)
             {
                 var result = new List<BackupHistory_Table>();
@@ -37,19 +39,17 @@ namespace EtlReporteria.DataAccess
                             BackupStartDate = (DateTime)reader["BackupStartDate"],
                             BackupFinishDate = (DateTime)reader["BackupFinishDate"],
                             LatestBackupLocation = reader["LatestBackupLocation"].ToString(),
-                            BackupSizeMB = Convert.ToInt64(reader["BackupSize"]) / 1024 / 1024,
-                            CompressedBackupSizeMB = Convert.ToInt64(reader["CompressedBackupSize"]) / 1024 / 1024,
+                            BackupSizeMB = Convert.ToInt64(reader["BackupSizeMB"]) / 1024 / 1024,
+                            CompressedBackupSizeMB = Convert.ToInt64(reader["CompressedBackupSizeMB"]) / 1024 / 1024,
                             ServerName = reader["server_name"].ToString()
                         };
                         result.Add(row);
                     }
                 }
-
                 _connection.CloseConnection();
                 return result;
             }
         }
     }
 
-}
 

@@ -37,7 +37,7 @@ namespace EtlReporteria.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("localhost\\SOFTLAND_TEST")]
         public string ServidorSqlTarget {
             get {
                 return ((string)(this["ServidorSqlTarget"]));
@@ -68,6 +68,42 @@ namespace EtlReporteria.Properties {
             }
             set {
                 this["ContrasenaSqlDestino"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ReportSqlServerInformation")]
+        public string DatabaseDestino {
+            get {
+                return ((string)(this["DatabaseDestino"]));
+            }
+            set {
+                this["DatabaseDestino"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("sa")]
+        public string UsuarioSqlTarget {
+            get {
+                return ((string)(this["UsuarioSqlTarget"]));
+            }
+            set {
+                this["UsuarioSqlTarget"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Colocolo25")]
+        public string ContrasenaSqlTarget {
+            get {
+                return ((string)(this["ContrasenaSqlTarget"]));
+            }
+            set {
+                this["ContrasenaSqlTarget"] = value;
             }
         }
     }

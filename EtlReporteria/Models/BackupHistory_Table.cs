@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace EtlReporteria.Models
 {
+    /*
+     * Clase que representa la tabla backup_history en la cual guardamos la informacion relevante de como han salido los backups en el servidor.  
+     */
     public class BackupHistory_Table
     {
         public string DatabaseName { get; set; }
@@ -15,10 +18,10 @@ namespace EtlReporteria.Models
         public int? CompatibilityLevel { get; set; }
         public DateTime BackupStartDate { get; set; }
         public DateTime BackupFinishDate { get; set; }
-        public Double Duracion_minutos { get; set; }
+        public TimeSpan Duracion_minutos { get; set; }
         public string LatestBackupLocation { get; set; }
-        public long BackupSizeMB { get; set; }
-        public long CompressedBackupSizeMB { get; set; }
+        public double BackupSizeMB { get; set; }
+        public double CompressedBackupSizeMB { get; set; }
         public string ServerName { get; set; }
 
     }

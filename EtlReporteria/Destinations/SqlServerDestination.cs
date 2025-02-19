@@ -17,7 +17,7 @@ namespace EtlReporteria.Destinations
         {
             _connection = connection;
         }
-        public void InsertData(IEnumerable<BackupHistory_Table> rows)
+        public void InsertData_backupHistory(IEnumerable<BackupHistory_Table> rows)
         {
             _connection.OpenConnection();
 

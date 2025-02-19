@@ -10,7 +10,7 @@ namespace EtlReporteria.Queries
     {
         public static readonly Dictionary<string, string> QueryDictionary = new()
     {
-        { "InsertBackupHistory", @"INSERT INTO BackupHistory_Table (DatabaseName, BackupType, DeviceType, RecoveryModel,
+        { "InsertBackupHistory", @"INSERT INTO BackupHistory (DatabaseName, BackupType, DeviceType, RecoveryModel,
                                     CompatibilityLevel, BackupStartDate, BackupFinishDate, Duracion_minutos, LatestBackupLocation, BackupSize,
                                     CompressedBackupSize, ServerName) VALUES (@DatabaseName, @BackupType, @DeviceType, @RecoveryModel, @CompatibilityLevel,
                                     @BackupStartDate, @BackupFinishDate, @Duracion_minutos, @LatestBackupLocation, @BackupSize, @CompressedBackupSize, @ServerName)" },
@@ -39,8 +39,8 @@ namespace EtlReporteria.Queries
                                 BackupStartDate = bs.Backup_Start_Date,
                                 BackupFinishDate = bs.Backup_Finish_Date,
                                 LatestBackupLocation = bf.physical_device_name,
-                                bs.backup_size ,
-                                bs.compressed_backup_size,
+                                BackupSizeMB = bs.backup_size ,
+                                CompressedBackupSizeMB = bs.compressed_backup_size ,
 	                            server_name
                             FROM msdb.dbo.backupset bs
                             LEFT JOIN msdb.dbo.backupmediafamily bf

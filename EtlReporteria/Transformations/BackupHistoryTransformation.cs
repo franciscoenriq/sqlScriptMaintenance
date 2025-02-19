@@ -13,9 +13,9 @@ namespace EtlReporteria.Transformations
             foreach (var row in rows)
             {
                 // Calcular la duración en minutos
-                row.Duracion_minutos = (row.BackupFinishDate - row.BackupStartDate).TotalMinutes;
+                row.Duracion_minutos = row.BackupFinishDate - row.BackupStartDate;
 
-             
+
                 yield return row;
             }
         }
