@@ -63,8 +63,7 @@ WHERE bs.backup_start_date > DATEADD(DAY, - 10, sysdatetime()) --only look at la
 ORDER BY bs.database_name ASC,
     bs.Backup_Start_Date DESC;
 
-
------ query recortada
+-- QUERY MODIFICADA PARA LA 
 SELECT bs.database_name,
     backuptype = CASE 
         WHEN bs.type = 'D' AND bs.is_copy_only = 0 THEN 'Full Database'
@@ -84,21 +83,18 @@ SELECT bs.database_name,
         WHEN 105 THEN 'A permanent backup device'
         ELSE 'Other Device'
         END AS DeviceType,
-    bms.software_name AS backup_software,
     bs.recovery_model,
     bs.compatibility_level,
     BackupStartDate = bs.Backup_Start_Date,
     BackupFinishDate = bs.Backup_Finish_Date,
-	BackupDurationMinutes = CAST(DATEDIFF(SECOND, bs.Backup_Start_Date,Backup_Finish_Date) AS FLOAT)/60,
     LatestBackupLocation = bf.physical_device_name,
-    backup_size_mb = CONVERT(DECIMAL(10, 2), bs.backup_size / 1024. / 1024.),
-    compressed_backup_size_mb = CONVERT(DECIMAL(10, 2), bs.compressed_backup_size / 1024. / 1024.)
-
+    bs.backup_size ,
+    bs.compressed_backup_size,
+	server_name
 FROM msdb.dbo.backupset bs
 LEFT JOIN msdb.dbo.backupmediafamily bf
     ON bs.[media_set_id] = bf.[media_set_id]
 INNER JOIN msdb.dbo.backupmediaset bms
     ON bs.[media_set_id] = bms.[media_set_id]
-WHERE bs.backup_start_date > DATEADD(DAY, - 10, sysdatetime()) --only look at last two months
-ORDER BY bs.database_name ASC,
-    bs.Backup_Start_Date DESC;
+WHERE bs.backup_start_date > DATEADD(DAY, - 2, sysdatetime()) 
+ORDER BY bs.Backup_Start_Date DESC, bs.database_name ASC

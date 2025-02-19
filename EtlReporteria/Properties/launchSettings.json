@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "EtlReporteria": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}

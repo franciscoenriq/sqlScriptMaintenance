@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="EtlReporteria.Properties" GeneratedClassName="Settings1">
+  <Profiles />
+  <Settings>
+    <Setting Name="ServidorSqlDestino" Type="System.String" Scope="User">
+      <Value Profile="(Default)">localhost\SOFTLAND_TEST</Value>
+    </Setting>
+    <Setting Name="ServidorSqlTarget" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="UsuarioSqlDestino" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sa</Value>
+    </Setting>
+    <Setting Name="ContrasenaSqlDestino" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Colocolo25</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
