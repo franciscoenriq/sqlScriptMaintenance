@@ -1,12 +1,12 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="EtlReporteria.Properties" GeneratedClassName="Settings1">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="EtlReporteria.Properties" GeneratedClassName="Settings_etl">
   <Profiles />
   <Settings>
     <Setting Name="ServidorSqlDestino" Type="System.String" Scope="User">
       <Value Profile="(Default)">localhost\SOFTLAND_TEST</Value>
     </Setting>
     <Setting Name="ServidorSqlTarget" Type="System.String" Scope="User">
-      <Value Profile="(Default)">localhost\SOFTLAND_TEST</Value>
+      <Value Profile="(Default)">192.168.1.101\GPICB</Value>
     </Setting>
     <Setting Name="UsuarioSqlDestino" Type="System.String" Scope="User">
       <Value Profile="(Default)">sa</Value>
@@ -18,10 +18,10 @@
       <Value Profile="(Default)">ReportSqlServerInformation</Value>
     </Setting>
     <Setting Name="UsuarioSqlTarget" Type="System.String" Scope="User">
-      <Value Profile="(Default)">sa</Value>
+      <Value Profile="(Default)">falmeida_UAT</Value>
     </Setting>
     <Setting Name="ContrasenaSqlTarget" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Colocolo25</Value>
+      <Value Profile="(Default)">Sys.aqswfa</Value>
     </Setting>
   </Settings>
 </SettingsFile>

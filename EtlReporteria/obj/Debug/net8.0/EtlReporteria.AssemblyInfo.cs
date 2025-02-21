@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EtlReporteria")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+23b3cf15411ff7fa871f9cf7fbb4bcb8a3cdf2d4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+57b9d81a7eb26fda6b9807bad6218078813fa2b7")]
 [assembly: System.Reflection.AssemblyProductAttribute("EtlReporteria")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EtlReporteria")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

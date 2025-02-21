@@ -19,17 +19,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Properties\Settings1.Designer.cs">
+    <Compile Update="Properties\Settings_etl.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Settings1.settings</DependentUpon>
+      <DependentUpon>Settings_etl.settings</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Properties\Settings1.settings">
+    <None Update="Properties\Settings_etl.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
+      <LastGenOutput>Settings_etl.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
 

@@ -13,11 +13,11 @@ namespace EtlReporteria.Properties {
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.12.0.0")]
-    internal sealed partial class Settings1 : global::System.Configuration.ApplicationSettingsBase {
+    internal sealed partial class Settings_etl : global::System.Configuration.ApplicationSettingsBase {
         
-        private static Settings1 defaultInstance = ((Settings1)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings1())));
+        private static Settings_etl defaultInstance = ((Settings_etl)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings_etl())));
         
-        public static Settings1 Default {
+        public static Settings_etl Default {
             get {
                 return defaultInstance;
             }
@@ -37,7 +37,7 @@ namespace EtlReporteria.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("localhost\\SOFTLAND_TEST")]
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.1.101\\GPICB")]
         public string ServidorSqlTarget {
             get {
                 return ((string)(this["ServidorSqlTarget"]));
@@ -85,7 +85,7 @@ namespace EtlReporteria.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("sa")]
+        [global::System.Configuration.DefaultSettingValueAttribute("falmeida_UAT")]
         public string UsuarioSqlTarget {
             get {
                 return ((string)(this["UsuarioSqlTarget"]));
@@ -97,7 +97,7 @@ namespace EtlReporteria.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Colocolo25")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Sys.aqswfa")]
         public string ContrasenaSqlTarget {
             get {
                 return ((string)(this["ContrasenaSqlTarget"]));
