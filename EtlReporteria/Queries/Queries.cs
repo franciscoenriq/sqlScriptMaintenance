@@ -113,6 +113,43 @@ namespace EtlReporteria.Queries
                                     @RunTime,
                                     @RunDuration
                                 );
+            " },
+            {"SelectDbState", @"
+                            SELECT 
+                            mf.name as Logic_db_name,
+	                        mf.state_desc AS File_State,
+	                        CASE 
+		                        WHEN mf.type = 0 THEN 'Archivo de datos'
+		                        WHEN mf.type = 1 THEN 'Archivo Log'
+	                        END AS Tipo_Archivo, 
+                            mf.size * 8 / 1024 AS Size_MB,
+	                         mf.max_size AS Tamano_maximo,
+	                        CAST(GETDATE() AS DATE) AS Fecha_ejecucion,
+	                        CONVERT(TIME(0), GETDATE()) AS Hora_ejecucion
+    
+                        FROM sys.master_files mf
+                        JOIN sys.databases d ON mf.database_id = d.database_id
+                        ORDER BY d.name;
+            " },
+            {"InsertDbState",@"
+                            INSERT INTO DbStateHistory (
+                            Logic_db_name, 
+                            File_State, 
+                            Tipo_Archivo, 
+                            Size_MB, 
+                            Tamano_maximo, 
+                            Fecha_ejecucion, 
+                            Hora_ejecucion
+                        )
+                        VALUES (
+                            @LogicDbName,
+                            @FileState,
+                            @TipoArchivo,
+                            @SizeMB,
+                            @TamanoMaximo,
+                            @FechaEjecucion,
+                            @HoraEjecucion
+                        );
             " }
     };
 

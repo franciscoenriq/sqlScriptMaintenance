@@ -22,7 +22,7 @@ namespace EtlReporteria.Extractor
         }
 
         /*
-         * Metodo para extraer la data de como salieron los backups. 
+         * Metodo para extraer la data del historial de backups. 
          */
         public IEnumerable<BackupHistory_Table> Extract_BackupHistory_Data(string query)
         {
@@ -54,6 +54,9 @@ namespace EtlReporteria.Extractor
             _connection.CloseConnection();
             return result;
         }
+        /*
+         * Metodo para extraer la informacion de los jobs acontecidos durante un periodo definido en la query. 
+         */
         public IEnumerable<JobsHistory_Table> Extract_JobsHistory_Data(string query)
         {
             var result = new List<JobsHistory_Table>();
@@ -84,8 +87,35 @@ namespace EtlReporteria.Extractor
                 return result;
             }
         }
-
+        /*
+         * Metodo para extrar los datos del estado de las bases de datos.
+         */
+        public IEnumerable<DbState_Table> Extract_DbState_Data(string query)
+        {
+            var result = new List<DbState_Table>();
+            _connection.OpenConnection();
+            using (var command = new SqlCommand(query, _connection.Connection))
+            using (var reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    var row = new DbState_Table
+                    {
+                        LogicDbName = reader["Logic_db_name"].ToString(),
+                        FileState = reader["File_State"].ToString(),
+                        TipoArchivo = reader["Tipo_Archivo"].ToString(),
+                        SizeMB = Convert.ToInt32(reader["Size_MB"]),
+                        TamanoMaximo = Convert.ToInt32(reader["Tamano_maximo"]),
+                        FechaEjecucion = Convert.ToDateTime(reader["Fecha_ejecucion"]),
+                        HoraEjecucion = (TimeSpan)reader["Hora_ejecucion"]
+                    };
+                    result.Add(row);
+                }
+                _connection.CloseConnection();
+                return result;
+            }
+        }
     }
 }
-
+       
 

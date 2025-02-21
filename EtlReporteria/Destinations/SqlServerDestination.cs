@@ -45,7 +45,7 @@ namespace EtlReporteria.Destinations
             }
             _connection.CloseConnection();
         }
-        public void InsertData_JobsHiistory(IEnumerable<JobsHistory_Table> rows)
+        public void InsertData_JobsHistory(IEnumerable<JobsHistory_Table> rows)
         {
             _connection.OpenConnection();
             Console.WriteLine("insertando data_jobs");
@@ -74,6 +74,30 @@ namespace EtlReporteria.Destinations
 
             _connection.CloseConnection();
         }
+        /*
+         * Metodo para insertar los datos del estado de las db en la tabla creada
+         */
+        public void InsertData_DbState(IEnumerable<DbState_Table> rows)
+        {
+            _connection.OpenConnection();
+            Console.WriteLine("insertando data db state");
+            foreach (var row in rows)
+            {
+                var query_insert = Queries.Queries.GetQuery("InsertDbState");
 
+                using (var command = new SqlCommand(query_insert, _connection.Connection))
+                {
+                    command.Parameters.AddWithValue("@LogicDbName", row.LogicDbName);
+                    command.Parameters.AddWithValue("@FileState", row.FileState);
+                    command.Parameters.AddWithValue("@TipoArchivo", row.TipoArchivo);
+                    command.Parameters.AddWithValue("@SizeMB", row.SizeMB); // Usamos DBNull si es nulo
+                    command.Parameters.AddWithValue("@TamanoMaximo", row.TamanoMaximo); // Usamos DBNull si es nulo
+                    command.Parameters.AddWithValue("@FechaEjecucion", row.FechaEjecucion);
+                    command.Parameters.AddWithValue("@HoraEjecucion", row.HoraEjecucion); // Usamos DBNull si es nulo
+                    command.ExecuteNonQuery();
+                }
+            }
+            _connection.CloseConnection();
+        }
     }
 }

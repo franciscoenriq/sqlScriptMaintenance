@@ -46,3 +46,23 @@ FROM sys.databases d
 JOIN sys.master_files f ON d.database_id = f.database_id
 WHERE f.type_desc = 'ROWS'
 GROUP BY d.name;
+
+
+--- query que se usa 
+
+
+SELECT 
+    mf.name as Logic_db_name,
+	mf.state_desc AS File_State,
+	CASE 
+		WHEN mf.type = 0 THEN 'Archivo de datos'
+		WHEN mf.type = 1 THEN 'Archivo Log'
+	END AS Tipo_Archivo, 
+    mf.size * 8 / 1024 AS Size_MB,
+	 mf.max_size AS Tamano_maximo,
+	CAST(GETDATE() AS DATE) AS Fecha_ejecucion,
+	CONVERT(TIME(0), GETDATE()) AS Hora_ejecucion
+    
+FROM sys.master_files mf
+JOIN sys.databases d ON mf.database_id = d.database_id
+ORDER BY d.name;

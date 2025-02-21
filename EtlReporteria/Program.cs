@@ -28,14 +28,24 @@ class Program
         var sourceConnection = new SqlServerConnection(cadenaConexion_target);
         var extractor = new SqlServerExtractor(sourceConnection);
 
+        //------------------------------------------------------------------------------
+        //Etapa de extraccion de los datos
         var rows_BackupHisotry = extractor.Extract_BackupHistory_Data(GetQuery("SelectBackupHistory"));
         var rows_JobsHistory = extractor.Extract_JobsHistory_Data(GetQuery("SelectJobsHistory"));
+        var rows_DbState = extractor.Extract_DbState_Data(GetQuery("SelectDbState"));
+
+        //------------------------------------------------------------------------------
+        //Etapa de transformacion 
         var transformer = new BackupHistoryTransformation();
         var transformedRows = transformer.Transform_Backup_History(rows_BackupHisotry);
 
+        //-----------------------------------------------------------------------------
+        //Etapa de carga
         var destinationConnection = new SqlServerConnection(cadenaConexion_destino);
         var destination = new SqlServerDestination(destinationConnection);
         destination.InsertData_backupHistory(transformedRows);
-        destination.InsertData_JobsHiistory(rows_JobsHistory);
+        destination.InsertData_JobsHistory(rows_JobsHistory);
+        destination.InsertData_DbState(rows_DbState);
+
     }
 }

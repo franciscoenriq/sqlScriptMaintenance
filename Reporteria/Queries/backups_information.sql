@@ -63,7 +63,7 @@ WHERE bs.backup_start_date > DATEADD(DAY, - 10, sysdatetime()) --only look at la
 ORDER BY bs.database_name ASC,
     bs.Backup_Start_Date DESC;
 
--- QUERY MODIFICADA PARA LA 
+-- QUERY esta quedo para usuarse 
 SELECT bs.database_name,
     backuptype = CASE 
         WHEN bs.type = 'D' AND bs.is_copy_only = 0 THEN 'Full Database'
